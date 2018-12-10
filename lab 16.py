@@ -5,6 +5,8 @@
 
 
 
+#def create_newSite():
+  # to be done by Ivan
 
 #
 # get_headlines()
@@ -27,7 +29,8 @@ def get_headlines():
   outputHeadlines = list()
   for i in range(0, len(nextCloseBracketOccur)):
     outputHeadlines.append( fullSite[nextCloseBracketOccur[i]:nextOpenBracketOccur[i]] )
-  return outputHeadlines  
+  
+  return trim_whitespaceCharacters(outputHeadlines) 
 
 #
 # load_fullSite
@@ -68,11 +71,21 @@ def find_nextOccuranceOfSubstring(subStr, mainStr, currLoc = 0):
     return -1
 
 
-
-
-
-
-
+def trim_whitespaceCharacters(headlinesIn):
+  retArry = list()
+  for hl in headlinesIn:
+    startLoc = 0
+    if hl.startswith('>\n'):
+      startLoc = 1
+    while hl[startLoc].isspace():
+      startLoc = startLoc + 1
+    endLoc = 0
+    while hl[len(hl) - 1 - endLoc].isspace():
+      endLoc = endLoc + 1
+    endLoc = len(hl) - 1 - endLoc
+    retArry.append( hl[startLoc:endLoc] )
+  return retArry
+    
 
 
 
