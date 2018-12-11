@@ -27,9 +27,12 @@ def create_newSite():
   
   # now we open our new file and write to it. close it after we're done.
   output = open(headlinesHTML, 'w')
-  output.writelines("%s" % line for line in openingHTML)
-  output.writelines("%s <br>" % line for line in headlines) 
-  output.writelines("%s <br>" % line for line in closingHTML)
+  for line in openingHTML:
+    output.write(line)
+  for line in headlines:
+    output.write(line + "<br>")
+  for line in closingHTML:
+    output.write(line)
   output.close()
 
 #
