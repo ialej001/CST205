@@ -1,19 +1,45 @@
 #
-# lab16
+# CST 205 Lab16
 #    created by: Alejandro Caicedo
-#    created by: Ivan Alejandre 
+#                Ivan Alejandre 
+# 12/10/18
 
 
+# this is the function to be called from console
 
-#def create_newSite():
-  # to be done by Ivan
+def create_newSite():
+  # create 'isolatedHeadlines.html' somewhere on your system, then change the
+  # location in the following variable
+  headlinesHTML = 'D:\Users\Ivan\Documents\school\CST 205\CST-205\mod 7\lab16HomePage\isolatedHeadlines.html'
+  
+  # grab headlines from our saved webpage that is bundled in the zip.
+  headlines = get_headlines()
+  
+  # create two variables, containing generic html code to create a webpage
+  openingHTML = ["<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01",
+  "Transition//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">",
+  "<html>",
+  "<head><title>BBC Headlines frozen in time</title>",
+  "</head>",
+  "<body>",
+  "<h1>"]
+  closingHTML = ["</h1>", "</body>", "</html>"]
+  
+  # now we open our new file and write to it. close it after we're done.
+  output = open(headlinesHTML, 'w')
+  output.writelines("%s" % line for line in openingHTML)
+  output.writelines("%s <br>" % line for line in headlines) 
+  output.writelines("%s <br>" % line for line in closingHTML)
+  output.close()
 
 #
 # get_headlines()
 #    returns raw headlines contained in news containers in BBC page 
 def get_headlines():
   import os
-  localUrl = r'/home/captain/CSUMB/CST205/JES_workspace/lab 16/BBC-Homepage.html'
+  
+  # change this to directory where files were extracted from zip
+  localUrl = r'D:\Users\Ivan\Documents\school\CST 205\CST-205\mod 7\lab16HomePage\BBC-Homepage.html'
   
   if not os.path.exists(localUrl):
     showInformation("BBC-Homepage.html path does not extist, please enter a correct one and try again")
@@ -52,7 +78,8 @@ def find_all_occurances(subStr, mainStr):
     locAry.append(currLoc)
     currLoc = find_nextOccuranceOfSubstring(subStr, mainStr, currLoc + 1)
   return locAry
-
+  
+#
 # find_all_occurances(subStr, mainStr)
 #   find ALL occurances of substring empty if no occur
 def find_all_occurances_afterIndicies(subStr, mainStr, indicAry):
@@ -62,15 +89,18 @@ def find_all_occurances_afterIndicies(subStr, mainStr, indicAry):
   return allOccur
     
 #
-#find_nextOccuranceOfSubstring
-#  returns index after next occurance of substr or -1 if not found
+# find_nextOccuranceOfSubstring
+#   returns index after next occurance of substr or -1 if not found
 def find_nextOccuranceOfSubstring(subStr, mainStr, currLoc = 0):
   try:
     return mainStr.index(subStr, currLoc) 
   except:
     return -1
 
-
+#
+# trim_whitespaceCharacters(headlinesIn)
+#  removes unnecessary characters so we end up with just text. saves each headline
+#  to an array with each string headline being its own index
 def trim_whitespaceCharacters(headlinesIn):
   retArry = list()
   for hl in headlinesIn:
@@ -82,20 +112,7 @@ def trim_whitespaceCharacters(headlinesIn):
     endLoc = 0
     while hl[len(hl) - 1 - endLoc].isspace():
       endLoc = endLoc + 1
-    endLoc = len(hl) - 1 - endLoc
+    endLoc = len(hl) - endLoc
     retArry.append( hl[startLoc:endLoc] )
   return retArry
     
-
-
-
-
-
-
-
-
-
-
-
-
-
