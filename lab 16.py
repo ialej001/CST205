@@ -115,7 +115,8 @@ def trim_whitespaceCharacters(headlinesIn):
     endLoc = 0
     while hl[len(hl) - 1 - endLoc].isspace():
       endLoc = endLoc + 1
-    endLoc = len(hl) - endLoc
-    retArry.append( hl[startLoc:endLoc] )
+
+    endLoc = len(hl) - 1 - endLoc
+    retArry.append( hl[startLoc:endLoc+1] )
   return retArry
     
